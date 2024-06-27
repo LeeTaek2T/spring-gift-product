@@ -1,52 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
   <title>Product List</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    h1 {
-      color: #333;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-    td img {
-      max-width: 100px;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-    }
-    .actions {
-      white-space: nowrap;
-    }
-    .actions a, .actions button {
-      margin-right: 5px;
-      padding: 5px 10px;
-      text-decoration: none;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 4px;
-      transition: background-color 0.3s;
-    }
-    .actions a:hover, .actions button:hover {
-      background-color: #45a049;
-    }
+    /* 필요한 스타일 정의 */
   </style>
 </head>
 <body>
@@ -66,17 +23,20 @@
     <td th:text="${product.id}">ID</td>
     <td th:text="${product.name}">Name</td>
     <td th:text="${product.price}">Price</td>
-    <td><img th:src="${product.imageUrl}" alt="Product Image"/></td>
-    <td class="actions">
-      <a th:href="@{|/products/edit/${product.id}|}">Edit</a>
-      <form th:action="@{|/products/delete/${product.id}|}" method="post" style="display:inline;">
+    <td>
+      <img th:src="${product.imageUrl}" alt="Product Image"/>
+    </td>
+    <td>
+      <a th:href="@{/products/edit/{id}(id=${product.id})}">Edit</a>
+      <form th:action="@{/products/delete/{id}(id=${product.id})}" method="post" style="display:inline;">
         <input type="hidden" name="_method" value="delete"/>
         <button type="submit">Delete</button>
       </form>
+      <a th:href="@{/products/{productId}/options(productId=${product.id})}">Manage Options</a>
     </td>
   </tr>
   </tbody>
 </table>
-<a href="/products/new" style="display:block; margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px;">Add New Product</a>
+<a href="/products/new">Add New Product</a>
 </body>
 </html>

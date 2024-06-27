@@ -19,7 +19,9 @@ public class ProductService {
   public Product getProductById(Long id) {
     return products.get(id);
   }
-
+  public Long getNextId(){
+    return nextId;
+  }
   public Product addProduct(Product product) {
     product.setId(nextId++);
     products.put(product.getId(), product);
@@ -32,6 +34,7 @@ public class ProductService {
       existingProduct.setName(updatedProduct.getName());
       existingProduct.setPrice(updatedProduct.getPrice());
       existingProduct.setImageUrl(updatedProduct.getImageUrl());
+      existingProduct.setOptions(updatedProduct.getOptions());
       return existingProduct;
     }
     return null;

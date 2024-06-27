@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Option Form</title>
+  <style>
+    /* 필요한 스타일 정의 */
+  </style>
+</head>
+<body>
+<h1 th:text="${option.id == null} ? 'Add Option' : 'Edit Option'">Option Form</h1>
+<div class="form-container">
+  <form th:action="@{${option.id == null} ? '/products/' + ${product.id} + '/options/add' : '/products/' + ${product.id} + '/options/edit/' + ${option.id}}" th:object="${option}" method="post">
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" th:field="*{name}" />
+    </div>
+    <div>
+      <label for="additionalPrice">Additional Price:</label>
+      <input type="number" id="additionalPrice" th:field="*{additionalPrice}" />
+    </div>
+    <div>
+      <label for="description">Description:</label>
+      <input type="text" id="description" th:field="*{description}" />
+    </div>
+    <div>
+      <button type="submit">Save</button>
+    </div>
+  </form>
+  <a th:href="@{|/products/${product.id}/options|}">Back to Options</a>
+</div>
+</body>
+</html>

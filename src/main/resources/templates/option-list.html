@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Option List</title>
+  <style>
+    /* 필요한 스타일 정의 */
+  </style>
+</head>
+<body>
+<h1 th:text="'Options for Product ' + ${product.name}">Option List</h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Additional Price</th>
+    <th>Description</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="option : ${options}">
+    <td th:text="${option.id}">ID</td>
+    <td th:text="${option.name}">Name</td>
+    <td th:text="${option.additionalPrice}">Additional Price</td>
+    <td th:text="${option.description}">Description</td>
+    <td>
+      <a th:href="@{/products/{productId}/options/edit/{optionId}(productId=${product.id}, optionId=${option.id})}">Edit</a>
+      <form th:action="@{/products/{productId}/options/delete/{optionId}(productId=${product.id}, optionId=${option.id})}" method="post" style="display:inline;">
+        <input type="hidden" name="_method" value="delete"/>
+        <button type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<a th:href="@{/products}">Back to Products</a>
+
+<!-- 옵션 추가 버튼 -->
+<div>
+  <a th:href="@{/products/{productId}/options/new(productId=${product.id})}">Add New Option</a>
+</div>
+
+</body>
+</html>
